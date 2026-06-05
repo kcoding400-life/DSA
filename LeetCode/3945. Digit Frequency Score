@@ -1,0 +1,23 @@
+class Solution {
+    public int digitFrequencyScore(int n) {
+        // Array to store frequency of digits 0–9
+        int[] freq = new int[10];   
+        while (n > 0) {
+            int digit = n % 10;     // Get the last digit
+            freq[digit]++;         // Increment frequency for that digit
+            n /= 10;               // Remove the last digit
+        }
+        int score = 0;
+        // Calculate score: digit * frequency for each digit
+        for (int d = 0; d < 10; d++) {
+            score += d * freq[d];
+        }
+        return score;
+    }
+}
+
+Time Complexity: 
+𝑂(log⁡10(𝑛)) ≈ proportional to the number of digits.
+
+Space Complexity: 
+𝑂(1).
