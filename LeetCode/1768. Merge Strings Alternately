@@ -1,0 +1,25 @@
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        StringBuilder sb = new StringBuilder();
+        int i=0, j=0; //Initialize 2 pointers for each string
+        // Alternate characters
+        while(i<word1.length() && j<word2.length()){
+            sb.append(word1.charAt(i++));
+            sb.append(word2.charAt(j++));
+        }
+        // Append remaining characters
+        while(i<word1.length()){
+            sb.append(word1.charAt(i++));
+        }
+        while(j<word2.length()){
+            sb.append(word2.charAt(j++));
+        }
+        return sb.toString();
+    }
+}
+
+
+
+Let n = word1.length() and m = word2.length().
+Time Complexity: O(n + m)
+Space Complexity: O(n + m)
