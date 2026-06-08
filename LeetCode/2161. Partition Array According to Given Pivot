@@ -1,0 +1,68 @@
+Method1:
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        List<Integer> less = new ArrayList<>();
+        List<Integer> equal = new ArrayList<>();
+        List<Integer> greater = new ArrayList<>();
+
+        // Step 1: Partition elements into three lists
+        for (int num: nums){
+            if(num<pivot){
+                less.add(num);
+            }else if(num==pivot){
+                equal.add(num);
+            }else{
+                greater.add(num);
+            }
+        }
+
+        // Step 2: Concatenate results
+        int[] result = new int[nums.length];
+        int index=0;
+        for (int num: less) result[index++] = num;
+        for (int num: equal) result[index++] = num;
+        for (int num: greater) result[index++] = num;
+        return result;
+    }
+}
+
+
+Time Complexity: O(n) (single pass through array).
+Space Complexity: O(n) (three lists + result array).
+
+Method2: WITH O(1) space
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int n = nums.length;
+        
+        // Step 1: Count how many elements are less, equal, greater
+        int lessCount = 0, equalCount = 0;
+        for(int num : nums){
+            if(num < pivot) lessCount++;
+            else if(num == pivot) equalCount++;
+        }
+        
+        // Step 2: Compute starting indices for each section
+        int lessIndex = 0;
+        int equalIndex = lessCount;
+        int greaterIndex = lessCount + equalCount;
+        
+        // Step 3: Create result array
+        int[] result = new int[n];
+        
+        // Step 4: Place elements directly into correct section
+        for(int num : nums){
+            if(num < pivot){
+                result[lessIndex++] = num;
+            }else if(num == pivot){
+                result[equalIndex++] = num;
+            }else{
+                result[greaterIndex++] = num;
+            }
+        }
+        return result;
+    }
+}
+
+Time Complexity: O(n) (single pass to count, single pass to place).
+Space Complexity: O(1) extra (only counters and pointers; output array is required anyway).
