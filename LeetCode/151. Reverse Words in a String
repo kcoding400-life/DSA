@@ -1,0 +1,71 @@
+Method1:
+class Solution {
+    public String reverseWords(String s) {
+        // Step 1: Remove leading and trailing spaces ie s = s.trim();
+        // Step 2: Split the string into words using regex
+        // "\\s+" means one or more spaces, so multiple spaces are treated as a single separator
+        String[] words = s.trim().split("\\s+");
+        
+        StringBuilder sb = new StringBuilder();
+        // Step 3: Traverse the words array in reverse order
+        for(int i=words.length-1; i>=0; i--){
+            sb.append(words[i]);
+            // If it's not the last word, add a space after it
+            if(i>0) sb.append(" ");
+        }
+        return sb.toString();
+    }
+}
+
+Time Complexity: O(n) (where n = length of the string).
+Space Complexity: O(n) (for storing words and result).
+-------------------
+
+Method2:Java Solution (In‑Place Style)
+class Solution {
+    public String reverseWords(String s) {
+        // Step 1: Remove leading and trailing spaces so we don't process empty words at the edges
+        s = s.trim();
+        
+        // Step 2: Create a StringBuilder to build the final reversed string efficiently
+        StringBuilder sb = new StringBuilder();
+        
+        // Step 3: Initialize a pointer 'end' at the last character of the trimmed string
+        int end = s.length() - 1;
+        int start; // 'start' will mark the beginning of each word
+        
+        // Step 4: Loop until we've scanned the entire string backwards
+        while (end >= 0) {
+            // Step 4a: Skip any spaces we encounter (move 'end' left until we hit a letter)
+            while (end >= 0 && s.charAt(end) == ' ') {
+                end--;
+            }
+            // Step 4b: If we've moved past the beginning, stop the loop
+            if (end < 0) break;
+            
+            // Step 4c: Find the start index of the current word
+            start = end;
+            while (start >= 0 && s.charAt(start) != ' ') {
+                start--;
+            }
+            
+            // Step 4d: Extract the word using substring (from start+1 to end inclusive)
+            sb.append(s.substring(start + 1, end + 1));
+            
+            // Step 4e: If there are more words left, add a space after this word
+            if (start > 0) {
+                sb.append(" ");
+            }
+            
+            // Step 4f: Move 'end' pointer to just before this word to continue scanning
+            end = start;
+        }
+        
+        // Step 5: Convert the StringBuilder into a String and return the result
+        return sb.toString();
+    }
+}
+
+
+Time Complexity: O(n) (each character scanned once).
+Space Complexity: O(n) (for the result string).
