@@ -1,0 +1,25 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] answer = new int[n];
+
+        // Step 1: Build prefix products
+        answer[0] = 1; // no elements before index 0
+        for(int i=1; i<n; i++){
+            answer[i] = nums[i - 1] * answer[i - 1];  // answer[i] holds product of all elements before index i
+        }
+
+        // Step 2: Multiply by suffix products
+        int suffix=1;  // suffix product starts as 1 (no elements after last index)
+        for(int i = n - 1; i >= 0; i--){
+            answer[i] = answer[i] * suffix; //ans[i]=prefix*suffix
+            suffix *= nums[i]; // update suffix product by multiplying with current element
+        }
+        return answer;                    
+    }
+}
+
+
+
+Time Complexity: O(n) (two passes).
+Space Complexity: O(1) extra (just one variable for suffix).
