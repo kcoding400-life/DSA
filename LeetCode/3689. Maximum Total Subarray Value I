@@ -1,0 +1,20 @@
+class Solution {
+    public long maxTotalValue(int[] nums, int k) {
+        // Step 1: Initialize variables for global max and min
+        int maxval = Integer.MIN_VALUE;
+        int minval = Integer.MAX_VALUE;
+
+        // Step 2: Find global max and min in one pass
+        for(int num:nums){
+            maxval = Math.max(maxval, num);
+            minval = Math.min(minval, num);
+        }
+
+        // Step 3: Compute result as k * (max - min)
+        return 1L * k * (maxval - minval); //1L forces the multiplication to happen in long instead of int, preventing overflow.
+    }
+}
+
+
+Time Complexity: O(n) (single pass to find max and min).
+Space Complexity: O(1) (constant extra space).
