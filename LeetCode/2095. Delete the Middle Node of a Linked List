@@ -1,0 +1,36 @@
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        // Edge case: if the list is empty or has only one node,
+        // deleting the middle means returning null
+        if (head==null || head.next==null) return null;
+
+        // Step 1: Find the length of the linked list
+        int length=0;
+        ListNode temp=head;
+        while(temp!=null){
+            length++;
+            temp=temp.next;
+        }
+
+        // Step 2: Calculate the middle index (0-based)
+        int mid = length/2;
+
+        // Step 3: Traverse to the node just before the middle
+        temp=head;
+        for(int i=0; i<mid-1;i++){
+            temp=temp.next;// move forward until just before middle
+        }
+
+        // Step 4: Delete the middle node by skipping it
+        // temp is at node before middle, so we set its next pointer
+        // to skip the middle node and point to the node after middle
+        temp.next=temp.next.next;
+
+        // Step 5: Return the head of the modified list
+        return head;
+    }
+}
+
+
+Time Complexity: O(n) (one pass to count, one pass to delete).
+Space Complexity: O(1) (constant extra space).
