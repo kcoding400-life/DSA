@@ -1,0 +1,32 @@
+class Solution {
+    public int maxOperations(int[] nums, int k) {
+        // Sort the array first
+        Arrays.sort(nums);
+        
+        int left=0; // pointer at the start
+        int right=nums.length-1; // pointer at the end
+        int ct=0; // number of valid pairs
+        
+        while(left<right){
+            int sum = nums[left] + nums[right];
+            if(sum==k){
+                // Found a valid pair
+                ct++;
+                left++;
+                right--;
+            }
+            else if(sum<k){
+                // Need a larger sum → move left pointer right
+                left++;
+            }else{
+                // Need a smaller sum → move right pointer left
+                right--;
+            }
+        }
+        return ct;
+    }
+}
+
+
+Time Complexity: O(n log n) (due to sorting).
+Space Complexity: O(1) (in‑place, just pointers).
