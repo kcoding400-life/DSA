@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        // Two pointers: one for s, one for t
+        int i=0;
+        int j=0;
+        while(i<s.length() && j<t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++; // If characters match, move both pointers
+                j++;
+            }else{ 
+                j++; // If not, only move pointer for t
+            }
+        }
+        // If we have matched all characters of s, it's a subsequence
+        return i==s.length(); 
+    }
+}
+
+
+Time Complexity: O(n) or O(|t|) (we scan through t once).
+Space Complexity: O(1) (just two pointers).
