@@ -1,0 +1,31 @@
+class Solution {
+    public int maxArea(int[] height) {
+        // Two pointers: one at the start, one at the end
+        int left=0;
+        int right=height.length-1;
+
+        int maxarea=0;
+        while(left<right){
+            // Calculate the area formed by the two lines
+            int width=right-left;
+            int minheight = Math.min(height[left], height[right]);
+            int area=width*minheight;
+
+            // Update maxArea if this area is larger
+            maxarea=Math.max(maxarea, area);
+
+            // Move the pointer pointing to the shorter line inward because moving the taller line won't help increase area
+            if(height[left]<height[right]){
+                left++;
+            }else{
+                right--;
+            }
+        }
+        return maxarea;
+    }
+}
+
+
+
+Time Complexity: O(n) (each pointer moves at most once across the array).
+Space Complexity: O(1) (just variables).
