@@ -1,0 +1,28 @@
+class Solution {
+    public String reverseVowels(String s) {
+        // Convert string to char array for easy swapping
+        char[] chars = s.toCharArray();
+        int left=0, right=chars.length - 1;
+        while(left<right){
+            while(left<right && !isVowel(chars[left])) left++; // Move left pointer until it finds a vowel
+            while(left<right && !isVowel(chars[right])) right--; // Move right pointer until it finds a vowel
+            
+            // Swap vowels
+            char temp=chars[left];
+            chars[left]=chars[right];
+            chars[right]=temp;
+
+            left++;
+            right--;
+        }
+        return new String(chars);
+    }
+    // Helper function to check if a character is a vowel
+    private boolean isVowel(char c){
+        return "aeiouAEIOU".indexOf(c)!=-1;
+    }
+}
+
+
+Time Complexity: O(n) (each character checked once).
+Space Complexity: O(n) for char array (but required since strings are immutable).
