@@ -1,0 +1,17 @@
+class Solution {
+    public void moveZeroes(int[] nums) {
+        // 'left' points to the position where the next non-zero should go
+        int left=0;
+
+        // 'right' scans through the array
+        for(int right=0; right<nums.length;right++){
+            if(nums[right]!=0){
+                int temp = nums[left];
+                nums[left]=nums[right];
+                nums[right]=temp;
+                left++;
+            }
+        }
+    }
+}
+
