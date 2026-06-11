@@ -1,0 +1,23 @@
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int leftsum=0; // sum of elements to the left of current index
+        int totalsum=0;
+        for(int num: nums){
+            totalsum+=num; // compute total sum of array
+        }
+
+        for(int i=0; i<nums.length; i++){
+            int rightsum=totalsum-nums[i]-leftsum;
+            if(leftsum==rightsum){
+                return i;  // found pivot index
+            }
+            leftsum+=nums[i]; // update left sum
+        }
+        return -1;
+    }
+}  
+
+
+Complexity
+Time: O(n) (single pass after computing total sum).
+Space: O(1) (just a few variables).
