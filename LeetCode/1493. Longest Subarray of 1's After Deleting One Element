@@ -1,0 +1,28 @@
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int left=0; // start of window
+        int zeros=0; // count of zeros inside window
+        int maxlen=0;
+        
+        // Expand window by moving right pointer
+        for(int right=0; right<nums.length; right++){
+            if(nums[right]==0){
+                zeros++;
+            }
+            // If window has more than 1 zero, shrink from left
+            while(zeros>1){
+                if(nums[left]==0){
+                    zeros--; // remove zero from window
+                }
+                left++; // move left forward
+            }
+            // Window length is (right - left + 1), but we must delete one element → subtract 1
+            maxlen=Math.max(maxlen, right-left);
+        }
+        return maxlen;
+    }
+}
+
+Complexity
+Time: O(n) (each element processed once).
+Space: O(1) (just counters and pointers).
