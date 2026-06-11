@@ -1,0 +1,18 @@
+class Solution {
+    public int largestAltitude(int[] gain) {
+        int altitude =0; // starting altitude is 0
+        int maxaltitude = 0;
+        
+        // Traverse the gain array
+        for(int g: gain){
+            altitude+=g;
+            maxaltitude=Math.max(maxaltitude, altitude);
+        }
+        return maxaltitude;
+    }
+}
+
+
+Complexity
+Time: O(n) (single pass through gain).
+Space: O(1) (just two variables).
