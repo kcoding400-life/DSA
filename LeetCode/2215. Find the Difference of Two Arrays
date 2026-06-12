@@ -1,0 +1,37 @@
+class Solution {
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        // Convert arrays to sets for uniqueness and fast lookup
+        Set<Integer> set1 = new HashSet<>();
+        for(int num: nums1) set1.add(num);
+        Set<Integer> set2 = new HashSet<>();
+        for(int num: nums2) set2.add(num);
+        
+        // Find elements in set1 but not in set2
+        List<Integer> diff1 = new ArrayList<>();
+        for(int num: set1){
+            if(!set2.contains(num)){
+                diff1.add(num);
+            }
+        }
+
+        // Find elements in set2 but not in set1
+        List<Integer> diff2 = new ArrayList<>();
+        for(int num: set2){
+            if(!set1.contains(num)){
+                diff2.add(num);
+            }
+        }
+
+        // Return result as a list of lists
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(diff1);
+        result.add(diff2);
+        return result;
+    }
+}
+
+
+Time Complexity: 
+𝑂(𝑛+𝑚), where 𝑛 and 𝑚 are lengths of nums1 and nums2.
+Space Complexity: 
+𝑂(𝑛+𝑚) for storing sets.
