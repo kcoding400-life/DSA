@@ -1,0 +1,41 @@
+Method 1:
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        for(int i=0; i<n; i++){
+            for(int j=i+1;j<n;j++){
+                if(nums[i]+nums[j]==target){
+                    return new int[]{i,j};
+                }
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+}
+
+//return new int[]{i, j};
+//means “create a new array of type int[] containing the values i and j, and return it.
+
+//throw → Used to signal an exception (an error condition).
+//new IllegalArgumentException(...) → Creates a new exception object of type IllegalArgumentException.
+//This type of exception is commonly used when a method receives invalid input or cannot produce a valid result.
+
+--------------------------
+Method2:
+import java.util.HashMap;
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>(); //Create a HashMap to store numbers and their indices       
+        //Loop through the array
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i]; //Calculate the complement
+            //If complement is already in map, we found a solution
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};// Return the indices
+            }
+            //Otherwise, store current number with its index in map
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+}
